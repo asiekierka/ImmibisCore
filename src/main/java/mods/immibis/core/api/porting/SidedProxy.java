@@ -1,7 +1,10 @@
 package mods.immibis.core.api.porting;
 
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.File;
 
+import mods.immibis.core.api.net.IPacket;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -24,4 +27,5 @@ public abstract class SidedProxy {
 	public abstract boolean isDedicatedServer();
 	
 	public abstract Object createSidedObject(String clientClass, String serverClass);
+	public abstract void handlePacket(ChannelHandlerContext ctx, IPacket packet);
 }

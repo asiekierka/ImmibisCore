@@ -1,8 +1,11 @@
 package mods.immibis.core.porting;
 
 
+import io.netty.channel.ChannelHandlerContext;
+
 import java.io.File;
 
+import mods.immibis.core.api.net.IPacket;
 import mods.immibis.core.api.porting.PortableBlockRenderer;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -12,6 +15,8 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -20,6 +25,8 @@ import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -138,4 +145,15 @@ public class ClientProxy142 extends CommonProxy142 {
 		}
 	}
 
+	@Override
+	public void handlePacket(ChannelHandlerContext ctx, IPacket packet) {
+		switch (FMLCommonHandler.instance().getEffectiveSide()) {
+		    case CLIENT:
+		        packet.onReceived(Minecraft.getMinecraft().thePlayer);
+		        break;
+		    case SERVER:
+		        super.handlePacket(ctx, packet);
+		        break;
+		}
+	}
 }
