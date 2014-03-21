@@ -9,7 +9,7 @@ import cpw.mods.fml.common.gameevent.TickEvent.Phase;
 import cpw.mods.fml.relauncher.Side;
 
 public abstract class PortableBaseMod {
-	private class TickEventServerHandler {
+	public class TickEventServerHandler {
 		@SubscribeEvent
 		public void tickEventServer(TickEvent.ServerTickEvent event) {
 			if(event.phase != Phase.START) return;
@@ -17,7 +17,7 @@ public abstract class PortableBaseMod {
 		}
 	}
 	
-	private class TickEventClientHandler {
+	public class TickEventClientHandler {
 		@SubscribeEvent
 		public void tickEventClient(TickEvent.ClientTickEvent event) {
 			if(event.phase != Phase.START) return;
