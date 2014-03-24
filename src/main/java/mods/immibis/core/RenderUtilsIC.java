@@ -119,11 +119,11 @@ public class RenderUtilsIC {
 		        
 		        paddedSize = Math.max(actualW, actualH);
 		        width = height = paddedSize;
-		        if (p_147964_3_)
+		        /*if (p_147964_3_)
 		        {
 		            this.width += 16;
 		            this.height += 16;
-		        }
+		        }*/
 		        
 		        int[][] aint = new int[p_147964_1_.length][];
 		        for (int k = 0; k < p_147964_1_.length; ++k)
@@ -137,7 +137,7 @@ public class RenderUtilsIC {
 		                    throw new RuntimeException(String.format("Unable to load miplevel: %d, image is size: %dx%d, expected %dx%d", new Object[] {Integer.valueOf(k), Integer.valueOf(bufferedimage.getWidth()), Integer.valueOf(bufferedimage.getHeight()), Integer.valueOf(this.width >> k), Integer.valueOf(this.height >> k)}));
 		                }
 
-		                aint[k] = new int[bufferedimage.getWidth() * bufferedimage.getHeight()];
+		                aint[k] = new int[width * height];
 		                bufferedimage.getRGB(0, 0, bufferedimage.getWidth(), bufferedimage.getHeight(), aint[k], 0, bufferedimage.getWidth());
 		            }
 		        }
